@@ -5,12 +5,13 @@ import {
   updateItems,
   removingItems
 } from '../controllers/cart.controller.js';
+import { authMiddleware } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-router.get('/', getUserCart);
-router.post('/', addItem);
-router.put('/:productId', updateItems);
-router.delete('/:productId', removingItems);
+router.get('',authMiddleware, getUserCart);
+router.post('/add', authMiddleware,addItem);
+router.put('/update/:productId', authMiddleware,updateItems);
+router.delete('/delete/:productId', authMiddleware, removingItems);
 
 export default router;

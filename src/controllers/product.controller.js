@@ -1,6 +1,6 @@
 import { Product } from "../models/product.model.js";
 
-//Get all Products
+//Get all Products ✔
 
 export const getAllProducts = async (req,res,next)=> {
     try {
@@ -10,7 +10,7 @@ export const getAllProducts = async (req,res,next)=> {
         next(error) // Passes the error to the error-handling middleware
     }
 }
-// get product by id
+// get product by id ✔
 export const getProductByID = async(req,res,next)=>{
     try {
         const productId = req.params.id
@@ -23,7 +23,7 @@ export const getProductByID = async(req,res,next)=>{
         next(error)
     }
 }
-// creating new product
+// creating new product ✔
 export const createProduct = async (req,res,next)=>{
     try {
         const {name,description,stockQuantity,price} = req.body

@@ -3,8 +3,8 @@ import { getAllProducts, getProductByID, createProduct } from '../controllers/pr
 
 const router = express.Router();
 
-router.get('/api', getAllProducts);
-router.get('/api/:id', getProductByID);
+router.get('/', getAllProducts);
+router.get('/:id', getProductByID);
 router.post('/', createProduct);
 
 
