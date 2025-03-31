@@ -19,11 +19,13 @@ const registerUser = async (req, res, next) => {
             console.log("User already exists:", userExist);
             return res.status(400).json({ message: "User already exists" });
         }
-
         console.log("Creating user...");
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({ userName, email, password: hashedPassword });
 
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log("Hashed Entered Password:", hashedPassword);
+
+        const newUser = new User({ userName, email, password });
+        await newUser.save();
         console.log("User created:", newUser);
 
         const token = jwt.sign({ userId: newUser.User_id }, process.env.JWT_SECRET, { expiresIn: "24h" });
@@ -40,17 +42,25 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
     try {
         const { email, password } = req.body;
+        console.log("logged data" , req.body)
 
         // Find user by email
         const existingUser = await User.findOne({ email });
+        console.log("existing user", existingUser)
 
         if (!existingUser) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Compare hashed password
+        
+        if (!password || !existingUser.password) {
+            return res.status(400).json({ message: "Password or hash missing" });
+        }
+        
+        // Compare passwords
         const isPasswordValid = await bcrypt.compare(password, existingUser.password);
-
+        console.log("Password Match:", isPasswordValid);
+        
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid password" });
         }

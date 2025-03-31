@@ -50,7 +50,7 @@ export const addItem = async (req, res, next) => {
 // Update cart items
 export const updateItems = async (req, res, next) => {
     try {
-        const { quantity } = req.body;
+        const { quantity  } = req.body;
         const { productId } = req.params;
 
         const product = await Product.findById(productId);

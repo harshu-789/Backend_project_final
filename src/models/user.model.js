@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
-        unique: true,
+        unique : true,
         trim: true
       },
       email: {
@@ -34,7 +34,7 @@ userSchema.pre("save",async function(next) {
 // Comparing password
 
 userSchema.methods.comparePassword = async function(userPassword) {
-    return bcrypt.compare(userPassword,this.password)
+    return await bcrypt.compare(userPassword,this.password)
 }
 
 export const User =  mongoose.model("User",userSchema)
