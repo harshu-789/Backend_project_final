@@ -46,23 +46,27 @@ API Endpoints
 
 Product Routes
 
-GET /products - Get all products.
+GET /api/products - Get all products.
 
-GET /products/********:id - Get product details by ID.
+GET /api/products/********:id - Get product details by ID.
+
+POST /api/product -- Creating a new Prpduct.
 
 Cart Routes (Protected)
 
-POST /cart - Add product to cart.
+GET /api/cart --- Get user's Cart.
 
-PUT /cart/********:id - Update product quantity in cart.
+POST /api/cart - Add product to cart.
 
-DELETE /cart/********:id - Remove product from cart.
+PUT /api/cart/********:id - Update product quantity in cart.
+
+DELETE api/cart/********:id - Remove product from cart.
 
 Authentication Routes
 
-POST /register - Register a user.
+POST /api/auth/registerUser - Register a user.
 
-POST /login - Authenticate user and get JWT.
+POST /api/auth/loginUser - Authenticate user and get JWT.
 
 
 
